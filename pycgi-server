@@ -1,0 +1,26 @@
+#!/bin/bash 
+
+##
+# start|stop|restart python CGIHTTPServer
+#
+# TODO:
+#	  use shell Function for DRY
+# USAGE:
+#   ./manage_simplehttpserver.sh start|stop|restart
+#
+# VIEW:
+#   http://localhost:8000
+
+case $1 in
+	"start" )
+        echo "start python CGIHTTPServer"
+		python -m CGIHTTPServer &
+		;;
+	"stop" )
+		echo "stop python SimpleHTTPServer"
+		kill `ps aux | grep "python -m CGIHTTPServer"` | grep -v grep | awk '{print $2}'
+		;;
+	*)
+		echo "need start|stop"
+		exit 1
+esac
